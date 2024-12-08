@@ -7,7 +7,7 @@ export default function Header() {
       <img src={Logo} alt="" />
 
 <div className="flex flex-row gap-6 items-center ">
-  <div className="flex flex-row p-2 items-center bg-purple-light text-purple rounded-lg">
+  <div className="flex flex-row p-3  items-center gap-1 bg-purple-light text-purple rounded-lg">
     <MapPin size={24} weight="fill" />
     <p className="">Guarulhos,Sp</p>
   </div>

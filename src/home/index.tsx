@@ -2,11 +2,12 @@ import React from "react"
 import Header from "../components/header"
 import {coffees} from '../../data.json'
 import { ShoppingCartSimple, Timer, Package, Coffee } from '@phosphor-icons/react'
+import { ProductList } from "../components/product-list"
 export default function Home() {
   return (
     <div>
         <Header/>
-        <div className="flex flex-row items-start justify-center gap-36 pt-24 bg-bg-banner rounded-xl">
+        <div className="flex flex-row items-start justify-center gap-36 pt-24 bg-bg-banner bg-no-repeat bg-cover bg-center rounded-xl">
     <div className="flex items-start justify-center flex-col gap-6 pt-24 ">
       <p className="text-4xl font-bold">Encontre o café perfeito <br /> para qualquer hora do dia</p>
 
@@ -47,9 +48,10 @@ export default function Home() {
 
         </div>
 
-      <div>
-        {/* <h2>Nossos cafés</h2> */}
+      <div >
+        <h2 className="text-base-subtitle text-2xl pl-20 pt-12">Nossos cafés</h2>
 
+            <ProductList/>
           <div>
           </div>
       </div>

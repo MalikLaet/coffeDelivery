@@ -3,7 +3,7 @@ import React from "react"
 export function App() {
 
   return (
-    <div>
+    <div className="bg-background">
      <Home/>
     </div>
   )
