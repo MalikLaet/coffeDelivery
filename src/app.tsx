@@ -5,7 +5,7 @@ export function App() {
 
   return (
     <BrowserRouter>
-    <div className="bg-background">
+    <div className="bg-background  h-screen font-roboto">
       <Router/>
     </div>
     </BrowserRouter>

@@ -6,6 +6,10 @@ export default {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        baloo: ['"Baloo 2"', 'cursive'],
+        roboto: ['Roboto', 'sans-serif'],
+      },
       backgroundImage: {
         'bg-banner': "url('/public/background.png')"
       },
