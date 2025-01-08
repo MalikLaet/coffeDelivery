@@ -1,8 +1,11 @@
 import React from 'react'
 import { coffees } from "../../data.json"
 import { Minus, Plus, ShoppingCartSimple } from '@phosphor-icons/react'
+import { useCart } from '../context/cardContext'
 
 export function ProductList() {
+  const {addToCart} = useCart()
+
   return (
     <div className='flex flex-row flex-wrap items-center justify-center gap-12 pt-12 pb-12'>
       {coffees.map((coffee) => (
@@ -39,7 +42,10 @@ export function ProductList() {
                 <Minus size={16} />
               </button>
               <span className="text-base-subtitle text-sm">1</span>
-              <button className="text-purple-dark">
+              <button 
+              className="text-purple-dark"
+              onClick={() => addToCart(coffee)}
+              >
                 <Plus size={16} />
               </button>
             </div>
