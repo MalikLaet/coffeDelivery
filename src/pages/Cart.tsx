@@ -13,8 +13,14 @@ import {
 import { useCart } from "../context/cardContext";
 
 export default function Cart() {
-  const { cart, incrementQuantity, decrementQuantity, removeFromCart } = useCart();
+  const { cart, incrementQuantity, decrementQuantity, removeFromCart } =
+    useCart();
+  const [selectedPayment, setSelectedPayment] = useState<string | null>(null);
   const deliveryFee = 5.0; // Taxa de entrega fixa
+
+  const handleSelectPayment = (method: string) => {
+    setSelectedPayment(method);
+  };
 
   const totalItemsPrice = cart.reduce(
     (total, product) => total + product.price * product.quantity,
@@ -89,17 +95,56 @@ export default function Cart() {
                 O pagamento é feito na entrega. Escolha a forma que deseja pagar
               </p>
               <div className="flex items-center justify-between gap-24 pt-4 ">
-                <div className="flex items-center gap-3 bg-base-button p-3 rounded-lg cursor-pointer">
-                  <CreditCard color="#8047F8" />
-                  <p className="text-base-text">CARTÃO DE CRÉDITO</p>
+                <div
+                  className={`flex items-center gap-3 p-3 rounded-lg cursor-pointer 
+          ${
+            selectedPayment === "credit"
+              ? "bg-purple-light  border-purple border"
+              : "bg-base-button text-base-text"
+          } 
+          hover:bg-base-hover`}
+                  onClick={() => handleSelectPayment("credit")}
+                >
+                  <CreditCard
+                    color={selectedPayment === "credit" ? "#8047F8" : "#8047F8"}
+                    size={20}
+                  />
+                  <p>CARTÃO DE CRÉDITO</p>
                 </div>
-                <div className="flex items-center gap-3 bg-base-button p-3 rounded-lg cursor-pointer">
-                  <Bank color="#8047F8" />
-                  <p className="text-base-text">CARTÃO DE DÉBITO</p>
+
+                <div
+                  className={`flex items-center gap-3 p-3 rounded-lg cursor-pointer 
+          ${
+            selectedPayment === "debit"
+              ? "bg-purple-light  border-purple border"
+              : "bg-base-button text-base-text"
+          } 
+          hover:bg-base-hover`}
+                  onClick={() => handleSelectPayment("debit")}
+                >
+                  <Bank
+                    color={selectedPayment === "debit" ? "#8047F8" : "#8047F8"}
+                    size={20}
+                  />
+                  <p>CARTÃO DE DÉBITO</p>
                 </div>
-                <div className="flex items-center gap-3 bg-base-button p-3 rounded-lg cursor-pointer">
-                  <Money color="#8047F8" />
-                  <p className="text-base-text">DINHEIRO</p>
+
+                {/* Dinheiro */}
+                <div
+                  className={`flex items-center gap-3 p-3 rounded-lg cursor-pointer 
+          ${
+            selectedPayment === "money"
+              ? "bg-purple-light  border-purple border"
+              : "bg-base-button text-base-text"
+          } 
+          hover:bg-base-hover`}
+                  onClick={() => handleSelectPayment("money")}
+                >
+                  <Money
+                    color={selectedPayment === "money" ? "#8047F8" : "#8047F8"}
+                    size={20}
+                  />
+                  <p>DINHEIRO</p>
                 </div>
               </div>
             </div>
@@ -110,17 +155,27 @@ export default function Cart() {
               Resumo do Pedido
             </h2>
             {cart.length === 0 ? (
-              <p className="text-center text-base-label">Seu carrinho está vazio.</p>
+              <p className="text-center text-base-label">
+                Seu carrinho está vazio.
+              </p>
             ) : (
               <>
                 <div className="flex flex-col gap-4">
                   {cart.map((product) => (
-                    <div key={product.id} className="flex flex-col gap-4 border-b pb-4 border-base-button">
+                    <div
+                      key={product.id}
+                      className="flex flex-col gap-4 border-b pb-4 border-base-button"
+                    >
                       <div className="flex items-center gap-4">
-                        <img className="w-16 h-16 " src={product.image} alt={product.title} />
+                        <img
+                          className="w-16 h-16 "
+                          src={product.image}
+                          alt={product.title}
+                        />
                         <div className="flex-1">
-                          <p className="text-base-subtitle font-medium">{product.title}</p>
-                       
+                          <p className="text-base-subtitle font-medium">
+                            {product.title}
+                          </p>
                         </div>
                         <p className="text-base-text font-bold">
                           R${(product.price * product.quantity).toFixed(2)}
@@ -134,7 +189,9 @@ export default function Cart() {
                           >
                             <Minus size={16} />
                           </button>
-                          <span className="text-base-subtitle text-sm">{product.quantity}</span>
+                          <span className="text-base-subtitle text-sm">
+                            {product.quantity}
+                          </span>
                           <button
                             className="text-purple hover:text-purple-dark"
                             onClick={() => incrementQuantity(product.id)}
@@ -147,7 +204,7 @@ export default function Cart() {
                           onClick={() => removeFromCart(product.id)}
                         >
                           <div className="hover:text-purple-dark">
-                          <Trash size={16} color="#8047F8" />
+                            <Trash size={16} color="#8047F8" />
                           </div>
                           <span>REMOVER</span>
                         </button>
