@@ -57,10 +57,8 @@ export default function AddressForm({ setIsValid, setFormData }: AddressFormProp
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (validateForm()) {
-      console.log("Formulário válido, gravando no localStorage:", formData);
       localStorage.setItem("addressData", JSON.stringify(formData));
     } else {
-      console.log("Formulário inválido");
     }
   };
 

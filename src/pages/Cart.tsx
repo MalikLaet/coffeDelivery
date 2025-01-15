@@ -34,11 +34,15 @@ export default function Cart() {
       return;
     }
 
-    // Verifique e salve os dados no localStorage
-    console.log("Salvando dados no localStorage:", formData);
+    const orderData = {
+      addressData: formData,
+      paymentMethod: selectedPayment, 
+    };
+  
+    localStorage.setItem("orderData", JSON.stringify(orderData));
+
     localStorage.setItem("addressData", JSON.stringify(formData));
     
-    // Navega para a página de confirmação
     navigate("/confirmation");
   };
 
