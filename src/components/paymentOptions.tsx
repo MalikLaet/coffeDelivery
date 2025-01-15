@@ -1,18 +1,17 @@
-import { Bank, CreditCard, CurrencyDollar, Money } from '@phosphor-icons/react';
-import React, { useState } from 'react'
+import { Bank, CreditCard, CurrencyDollar, Money } from "@phosphor-icons/react";
+import React from "react";
 
 interface PaymentOptionsProps {
-    selectedPayment: string | null;
-    onSelectPayment: (method: string) => void;
-  }
+  selectedPayment: string | null;
+  onSelectPayment: (method: string) => void;
+}
 
-export default function PaymentOptions() {
-    const [selectedPayment, setSelectedPayment] = useState<string | null>(null);
+export default function PaymentOptions({
+  selectedPayment,
+  onSelectPayment,
+}: PaymentOptionsProps) {
+ 
 
-    const handleSelectPayment = (method: string) => {
-        setSelectedPayment(method);
-      };
-    
   return (
     <div className="flex flex-col items-start bg-base-card p-8 w-full">
     <div className="flex items-center gap-2">
@@ -25,13 +24,13 @@ export default function PaymentOptions() {
     <div className="flex items-center justify-between gap-24 pt-4 ">
       <div
         className={`flex items-center gap-3 p-3 rounded-lg cursor-pointer 
-${
-  selectedPayment === "credit"
-    ? "bg-purple-light  border-purple border"
-    : "bg-base-button text-base-text"
-} 
-hover:bg-base-hover`}
-        onClick={() => handleSelectPayment("credit")}
+        ${
+          selectedPayment === "credit"
+            ? "bg-purple-light border-purple border"
+            : "bg-base-button text-base-text"
+        } 
+        hover:bg-base-hover`}
+        onClick={() => onSelectPayment("credit")}
       >
         <CreditCard
           color={selectedPayment === "credit" ? "#8047F8" : "#8047F8"}
@@ -42,13 +41,13 @@ hover:bg-base-hover`}
 
       <div
         className={`flex items-center gap-3 p-3 rounded-lg cursor-pointer 
-${
-  selectedPayment === "debit"
-    ? "bg-purple-light  border-purple border"
-    : "bg-base-button text-base-text"
-} 
-hover:bg-base-hover`}
-        onClick={() => handleSelectPayment("debit")}
+        ${
+          selectedPayment === "debit"
+            ? "bg-purple-light border-purple border"
+            : "bg-base-button text-base-text"
+        } 
+        hover:bg-base-hover`}
+        onClick={() => onSelectPayment("debit")}
       >
         <Bank
           color={selectedPayment === "debit" ? "#8047F8" : "#8047F8"}
@@ -57,16 +56,15 @@ hover:bg-base-hover`}
         <p>CARTÃO DE DÉBITO</p>
       </div>
 
-      {/* Dinheiro */}
       <div
         className={`flex items-center gap-3 p-3 rounded-lg cursor-pointer 
-${
-  selectedPayment === "money"
-    ? "bg-purple-light  border-purple border"
-    : "bg-base-button text-base-text"
-} 
-hover:bg-base-hover`}
-        onClick={() => handleSelectPayment("money")}
+        ${
+          selectedPayment === "money"
+            ? "bg-purple-light border-purple border"
+            : "bg-base-button text-base-text"
+        } 
+        hover:bg-base-hover`}
+        onClick={() => onSelectPayment("money")}
       >
         <Money
           color={selectedPayment === "money" ? "#8047F8" : "#8047F8"}
@@ -76,5 +74,5 @@ hover:bg-base-hover`}
       </div>
     </div>
   </div>
-  )
+  );
 }
