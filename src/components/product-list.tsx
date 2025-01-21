@@ -2,6 +2,7 @@ import React from 'react'
 import { coffees } from "../../data.json"
 import { Minus, Plus, ShoppingCartSimple } from '@phosphor-icons/react'
 import { useCart } from '../context/cardContext'
+import { Link } from 'react-router-dom'
 
 export function ProductList() {
   const {addToCart} = useCart()
@@ -50,7 +51,9 @@ export function ProductList() {
               </button>
             </div>
             <div className="flex p-2 rounded-md bg-purple-dark">
+              <Link to="/Cart">
               <ShoppingCartSimple color="#FAFAFA" weight="fill" size={24} />
+              </Link>
             </div>
           </div>
         </div>
